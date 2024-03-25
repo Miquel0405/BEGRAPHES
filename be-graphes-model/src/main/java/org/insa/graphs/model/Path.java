@@ -246,7 +246,7 @@ public class Path {
      * 
      * @return Minimum travel time to travel this path (in seconds).
      * 
-     * @deprecated Need to be implemented.
+     * Need to be implemented.
      */
     public double getMinimumTravelTime() {
         // TODO:
