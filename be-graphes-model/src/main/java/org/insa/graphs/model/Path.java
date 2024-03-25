@@ -202,7 +202,21 @@ public class Path {
      */
     public boolean isValid() {
         // TODO:
-        return false;
+         if (this.isEmpty()){
+            res=true;
+        }
+        if (this.size()==1){
+            res=true; 
+        }else{
+            if (this.arcs.get(0).getOrigin()==this.getOrigin()){
+                int i=0;
+                while(i <this.arcs.size()&&this.arcs.get(i).getDestination()==this.arcs.get(i+1).getOrigin()){
+                    i++;
+                }
+                if (i==this.arcs.size()){res=true;}
+            } 
+        }
+        return res; 
     }
 
     /**
