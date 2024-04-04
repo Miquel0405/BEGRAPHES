@@ -36,6 +36,24 @@ public class Path {
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
         // TODO:
+        for (int i= 0; i<nodes.size()-1; i++){
+            boolean Valid = false;
+            for (Arc a :nodes.get(i).getSuccessors()){
+                if (a.getDestination()==nodes.get(i+1)){
+                    Valid = true;
+                    double minspeed = 1000000000;
+                    Arc minspeedArc = a;
+                    if(minspeed > a.getMinimumTravelTime()){
+                        minspeed = a.getMinimumTravelTime();
+                        minspeedArc = a; 
+                    }
+                    arcs.add(minspeedArc);
+                }
+            }
+            if (!Valid){
+                throw (new IllegalArgumentException("Liste de Nodes incorrecte"));
+            }
+        }
         return new Path(graph, arcs);
     }
 
@@ -57,6 +75,24 @@ public class Path {
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
         // TODO:
+        for (int i= 0; i<nodes.size()-1; i++){
+            boolean Valid = false;
+            for (Arc a :nodes.get(i).getSuccessors()){
+                if (a.getDestination()==nodes.get(i+1)){
+                    Valid = true;
+                    double minlength = 1000000000;
+                    Arc minspeedArc = a;
+                    if(minlength > a.getLength()){
+                        minlength = a.getLength();
+                        minspeedArc = a; 
+                    }
+                    arcs.add(minspeedArc);
+                }
+            }
+            if (!Valid){
+                throw (new IllegalArgumentException("Liste de Nodes incorrecte"));
+            }
+        }
         return new Path(graph, arcs);
     }
 
@@ -202,6 +238,7 @@ public class Path {
      */
     public boolean isValid() {
         // TODO:
+        boolean res= false;
          if (this.isEmpty()){
             res=true;
         }
