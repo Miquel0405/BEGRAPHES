@@ -81,12 +81,12 @@ public class Path {
                 if (a.getDestination()==nodes.get(i+1)){
                     Valid = true;
                     double minlength = 1000000000;
-                    Arc minspeedArc = a;
+                    Arc minlengthArc = a;
                     if(minlength > a.getLength()){
                         minlength = a.getLength();
-                        minspeedArc = a; 
+                        minlengthArc = a; 
                     }
-                    arcs.add(minspeedArc);
+                    arcs.add(minlengthArc);
                 }
             }
             if (!Valid){
