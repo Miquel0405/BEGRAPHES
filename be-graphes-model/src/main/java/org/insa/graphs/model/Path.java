@@ -29,32 +29,38 @@ public class Path {
      * 
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
      *         consecutive nodes in the list are not connected in the graph.
-     * 
+     *
      *
      */
     public static Path createFastestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
         // TODO:
-        for (int i= 0; i<nodes.size()-1; i++){
-            boolean Valid = false;
-            for (Arc a :nodes.get(i).getSuccessors()){
-                if (a.getDestination()==nodes.get(i+1)){
-                    Valid = true;
-                    double minspeed = 1000000000;
-                    Arc minspeedArc = a;
-                    if(minspeed > a.getMinimumTravelTime()){
-                        minspeed = a.getMinimumTravelTime();
-                        minspeedArc = a;
+        if (nodes.size() ==1){
+            return new Path(graph, nodes.get(0));
+        }
+        else{
+            for (int i= 0; i<nodes.size()-1; i++){
+                boolean Valid = false;
+                Arc mintimeArc = nodes.get(i).getSuccessors().get(0);
+                double mintime = 1000000000;
+                for (Arc a :nodes.get(i).getSuccessors()){
+                    if (a.getDestination()==nodes.get(i+1) && mintime > a.getMinimumTravelTime()){
+                        Valid = true;
+                        mintime = a.getMinimumTravelTime();
+                        mintimeArc = a;
                     }
-                    arcs.add(minspeedArc);
+                    
+                }
+                if (!Valid){
+                    throw (new IllegalArgumentException("Liste de Nodes incorrecte"));
+                }
+                else{
+                    arcs.add(mintimeArc);
                 }
             }
-            if (!Valid){
-                throw (new IllegalArgumentException("Liste de Nodes incorrecte"));
-            }
-        }
-        return new Path(graph, arcs);
+            return new Path(graph, arcs);
+    }
     }
 
     /**
@@ -67,7 +73,12 @@ public class Path {
      * @return A path that goes through the given list of nodes.
      *
      * @throws IllegalArgumentException If the list of nodes is not valid, i.e. two
-     *         consecutive nodes in the list are not connected in the graph.
+     *         consecutive nodes in tif (!Valid){
+                    throw (new IllegalArgumentException("Liste de Nodes incorrecte"));
+                }
+                else{
+                    arcs.add(mintimeArc);
+                }he list are not connected in the graph.
      *
      *
      */
@@ -75,25 +86,31 @@ public class Path {
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
         // TODO:
-        for (int i= 0; i<nodes.size()-1; i++){
-            boolean Valid = false;
-            for (Arc a :nodes.get(i).getSuccessors()){
-                if (a.getDestination()==nodes.get(i+1)){
-                    Valid = true;
-                    double minlength = 1000000000;
-                    Arc minlengthArc = a;
-                    if(minlength > a.getLength()){
+        if (nodes.size() ==1){
+            return new Path(graph, nodes.get(0));
+        }
+        else{
+            for (int i= 0; i<nodes.size()-1; i++){
+                boolean Valid = false;
+                Arc minlengthArc = nodes.get(i).getSuccessors().get(0);
+                double minlength = 1000000000;
+                for (Arc a :nodes.get(i).getSuccessors()){
+                    if (a.getDestination()==nodes.get(i+1) && minlength > a.getLength()){
+                        Valid = true;
                         minlength = a.getLength();
-                        minlengthArc = a; 
+                        minlengthArc = a;
                     }
+                    
+                }
+                if (!Valid){
+                    throw (new IllegalArgumentException("Liste de Nodes incorrecte"));
+                }
+                else{
                     arcs.add(minlengthArc);
                 }
             }
-            if (!Valid){
-                throw (new IllegalArgumentException("Liste de Nodes incorrecte"));
-            }
+            return new Path(graph, arcs);
         }
-        return new Path(graph, arcs);
     }
 
     /**
@@ -239,15 +256,15 @@ public class Path {
     public boolean isValid() {
         // TODO:
         boolean res= false;
-         if (this.isEmpty()){
+        if (this.isEmpty()){
             res=true;
         }
-        if (this.size()==1){
-            res=true; 
+        else if (this.size()==1){
+            res=true;
         }else{
             if (this.arcs.get(0).getOrigin()==this.getOrigin()){
-                int i=0;
-                while(i <this.arcs.size()&&this.arcs.get(i).getDestination()==this.arcs.get(i+1).getOrigin()){
+                int i=1;
+                while(i <this.arcs.size()&&this.arcs.get(i-1).getDestination()==this.arcs.get(i).getOrigin()){
                     i++;
                 }
                 if (i==this.arcs.size()){res=true;}
