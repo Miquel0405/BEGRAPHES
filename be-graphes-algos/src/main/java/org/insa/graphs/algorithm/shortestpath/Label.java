@@ -51,10 +51,14 @@ public class Label implements Comparable<Label>{
         return this.cout_realise;
     }
 
+    public double getTotalCost(){
+        return getCost();
+    }
+
     public int compareTo(Label l){
-        if (this.cout_realise==l.cout_realise){
+        if (this.getTotalCost()==l.getTotalCost()){
             return 0;
-        }else if(this.cout_realise>l.cout_realise){
+        }else if(this.getTotalCost()>l.getTotalCost()){
             return 1;
         }else{
             return -1;
