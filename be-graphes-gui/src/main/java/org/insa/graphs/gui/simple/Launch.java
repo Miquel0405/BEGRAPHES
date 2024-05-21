@@ -22,9 +22,9 @@ public class Launch {
 
     /**
      * Create a new Drawing inside a JFrame an return it.
-     * 
+     *
      * @return The created drawing.
-     * 
+     *
      * @throws Exception if something wrong happens when creating the graph.
      */
     public static Drawing createDrawing() throws Exception {
@@ -45,7 +45,7 @@ public class Launch {
     }
 
     public static void main(String[] args) throws Exception {
-
+        
         // Visit these directory to see the list of available files on Commetud.
         final String mapName = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
         final String pathName = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Paths/path_fr31insa_rangueil_r2.path";
@@ -54,25 +54,29 @@ public class Launch {
         final GraphReader reader = new BinaryGraphReader(
                 new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
 
-        // TODO: Read the graph.
+        // Read the graph.
         final Graph graph = reader.read();
 
         // Create the drawing:
         final Drawing drawing = createDrawing();
 
-        // TODO: Draw the graph on the drawing.
+        // Draw the graph on the drawing.
         drawing.drawGraph(graph);
 
-        // TODO: Create a PathReader.
+        // Create a PathReader.
         final PathReader pathReader = new BinaryPathReader(
             new DataInputStream(new BufferedInputStream(new FileInputStream(pathName))));
 ;
 
-        // TODO: Read the path.
+        // Read the path.
         final Path path = pathReader.readPath(graph);
 
-        // TODO: Draw the path.
+        // Draw the path.
         drawing.drawPath(path);
+
+        //Close pathReader et GraphReader
+        reader.close();
+        pathReader.close();
     }
 
 }

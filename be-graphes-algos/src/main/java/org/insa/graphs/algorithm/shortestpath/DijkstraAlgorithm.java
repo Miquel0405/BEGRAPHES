@@ -60,10 +60,12 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 if (!data.isAllowed(a)) {
                     continue;
                 }
+
                 Label courant=labels.get(a.getDestination().getId());
                 if (!courant.isMarque()){
-                    if (courant.getCost()> x.getCost()+a.getLength()){
-                        courant.setCout_realise(x.getCost()+a.getLength());
+
+                    if (courant.getCost()> x.getCost()+data.getCost(a)){
+                        courant.setCout_realise(x.getCost()+data.getCost(a));
                         if (tas.Exist(courant)){
                             tas.remove(courant);
                             tas.insert(courant);
