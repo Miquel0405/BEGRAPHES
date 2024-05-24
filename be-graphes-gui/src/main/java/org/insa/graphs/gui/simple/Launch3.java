@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import org.insa.graphs.algorithm.AbstractInputData;
 import org.insa.graphs.algorithm.ArcInspector;
 import org.insa.graphs.algorithm.ArcInspectorFactory;
 import org.insa.graphs.algorithm.shortestpath.AStarAlgorithm;
@@ -84,7 +85,7 @@ public class Launch3 {
     }
 
 
-    public static void compareDijkstraEtBellman(ShortestPathData data, int mode){
+    public static void compareDijkstraEtBellman(ShortestPathData data){
         DijkstraAlgorithm dijkstraAlgo;
         BellmanFordAlgorithm bellmanAlgo;
         ShortestPathSolution solutionDijkstra;
@@ -95,19 +96,20 @@ public class Launch3 {
         solutionBellman = bellmanAlgo.run();
         System.out.println("BELLMAN:  "+solutionBellman.toString());
         System.out.println("DIJKSTRA:  "+solutionDijkstra.toString());
+        AbstractInputData.Mode m=data.getMode();
         if (solutionDijkstra.isFeasible()){
-            if (mode<=1){ 
-                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getLength());
+            if (m==AbstractInputData.Mode.LENGTH){ 
+                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getLength()/1000);
             }
-            else{
-                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getMinimumTravelTime());
+            else if (m==AbstractInputData.Mode.TIME){
+                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getMinimumTravelTime()/60);
             }
         }
     }
 
 
 
-    public static void compareDijkstraEtAstar(ShortestPathData data, int mode){
+    public static void compareDijkstraEtAstar(ShortestPathData data){
         DijkstraAlgorithm dijkstraAlgo;
         AStarAlgorithm aStarAlgo;
         ShortestPathSolution solutionDijkstra;
@@ -118,12 +120,13 @@ public class Launch3 {
         solutionAStar = aStarAlgo.run();
         System.out.println("ASTAR:  "+solutionAStar.toString());
         System.out.println("DIJKSTRA:  "+solutionDijkstra.toString());
+        AbstractInputData.Mode m=data.getMode();
         if (solutionDijkstra.isFeasible()){
-            if (mode<=1){ 
-                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getLength());
+            if (m==AbstractInputData.Mode.LENGTH){
+                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionAStar.getPath().getLength()/1000);
             }
-            else{
-                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getMinimumTravelTime());
+            else if (m==AbstractInputData.Mode.TIME){
+                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionAStar.getPath().getMinimumTravelTime()/60);
             }
         }
     }
@@ -153,26 +156,26 @@ public class Launch3 {
             ShortestPathData d=initialize_data(10, 30, 0, g);
             System.out.println("-----------------------");
             System.out.println(d.toString());
-            compareDijkstraEtBellman(d, 0);
-            compareDijkstraEtAstar(d, 0);
+            compareDijkstraEtBellman(d);
+            compareDijkstraEtAstar(d);
             //Test chemin plus court uniquement pour voitures (chemin non disponible)
             d=initialize_data(20, 40, 1, g);
             System.out.println("-----------------------");
             System.out.println(d.toString());
-            compareDijkstraEtBellman(d, 1);
-            compareDijkstraEtAstar(d, 1);
+            compareDijkstraEtBellman(d);
+            compareDijkstraEtAstar(d);
             //Test chemin plus rapide pour tous les moyens de transport (chemin disponible)
             d=initialize_data(5, 25, 2, g);
             System.out.println("-----------------------");
             System.out.println(d.toString());
-            compareDijkstraEtBellman(d, 2);
-            compareDijkstraEtAstar(d, 2);
+            compareDijkstraEtBellman(d);
+            compareDijkstraEtAstar(d);
             //Test chemin plus rapide uniquement a pied (chemin non disponible)
             d=initialize_data(0, 50, 3, g);
             System.out.println("-----------------------");
             System.out.println(d.toString());
-            compareDijkstraEtBellman(d, 3);
-            compareDijkstraEtAstar(d, 3);
+            compareDijkstraEtBellman(d);
+            compareDijkstraEtAstar(d);
 
 
             //TEST POUR LE GRAPHE CARRE_DENSE
@@ -184,12 +187,12 @@ public class Launch3 {
             System.out.println("-----------------------");
             System.out.println(d.toString());
                 //compareDijkstraEtBellman(d);
-            compareDijkstraEtAstar(d, 0);
+            compareDijkstraEtAstar(d);
             d=initialize_data(0, 500, 2, g);
             System.out.println("-----------------------");
             System.out.println(d.toString());
                 //compareDijkstraEtBellman(d);
-            compareDijkstraEtAstar(d, 2);
+            compareDijkstraEtAstar(d);
 
         }
         catch(FileNotFoundException e){
