@@ -33,17 +33,18 @@ public class Launch3 {
 
     private static List <ArcInspector> listInspector;
     private static ArcInspector arcInspector;
-    private static Graph graphINSA = null;
-    private static Graph graphWashington = null;
-    private static Graph graphBelgium = null;
-    private static Graph graphCarreDense = null;
 
 
-
-    String mapINSA = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
-    String mapBelgium = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/belgium.mapgr";
-    String mapWashington = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/washington.mapgr";
-    String mapCarreDense = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/carre-dense.mapgr";
+    static String[] autres_maps= {
+        "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/belgium.mapgr",
+        "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/washington.mapgr"
+    };
+    
+    // static String mapINSA = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
+    // static String mapBelgium = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/belgium.mapgr";
+    // static String mapWashington = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/washington.mapgr";
+    // static String mapCarreDense = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/carre-dense.mapgr";
+    
     
     
     /* Create a new Drawing inside a JFrame an return it.
@@ -85,50 +86,50 @@ public class Launch3 {
     }
 
 
-    public static void compareDijkstraEtBellman(ShortestPathData data){
-        DijkstraAlgorithm dijkstraAlgo;
+    public static void compareDijkstraEtBellman(ShortestPathSolution solutionDijkstra){
+        //DijkstraAlgorithm dijkstraAlgo;
         BellmanFordAlgorithm bellmanAlgo;
-        ShortestPathSolution solutionDijkstra;
+        //ShortestPathSolution solutionDijkstra;
         ShortestPathSolution solutionBellman;
-        dijkstraAlgo = new DijkstraAlgorithm(data);
-        bellmanAlgo= new BellmanFordAlgorithm(data);
-        solutionDijkstra = dijkstraAlgo.run();
+        //dijkstraAlgo = new DijkstraAlgorithm(data);
+        bellmanAlgo= new BellmanFordAlgorithm(solutionDijkstra.getInputData());
+        //solutionDijkstra = dijkstraAlgo.run();
         solutionBellman = bellmanAlgo.run();
         System.out.println("BELLMAN:  "+solutionBellman.toString());
         System.out.println("DIJKSTRA:  "+solutionDijkstra.toString());
-        AbstractInputData.Mode m=data.getMode();
-        if (solutionDijkstra.isFeasible()){
-            if (m==AbstractInputData.Mode.LENGTH){ 
-                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getLength()/1000);
-            }
-            else if (m==AbstractInputData.Mode.TIME){
-                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getMinimumTravelTime()/60);
-            }
-        }
+        //AbstractInputData.Mode m=data.getMode();
+        // if (solutionDijkstra.isFeasible()){
+        //     if (m==AbstractInputData.Mode.LENGTH){
+        //         System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getLength()/1000);
+        //     }
+        //     else if (m==AbstractInputData.Mode.TIME){
+        //         System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getMinimumTravelTime()/60);
+        //     }
+        // }
     }
 
 
 
-    public static void compareDijkstraEtAstar(ShortestPathData data){
-        DijkstraAlgorithm dijkstraAlgo;
+    public static void compareDijkstraEtAstar(ShortestPathSolution solutionDijkstra){
+        //DijkstraAlgorithm dijkstraAlgo;
         AStarAlgorithm aStarAlgo;
-        ShortestPathSolution solutionDijkstra;
+        //ShortestPathSolution solutionDijkstra;
         ShortestPathSolution solutionAStar;
-        dijkstraAlgo = new DijkstraAlgorithm(data);
-        aStarAlgo= new AStarAlgorithm(data);
-        solutionDijkstra = dijkstraAlgo.run();
+        //dijkstraAlgo = new DijkstraAlgorithm(data);
+        aStarAlgo= new AStarAlgorithm(solutionDijkstra.getInputData());
+        //solutionDijkstra = dijkstraAlgo.run();
         solutionAStar = aStarAlgo.run();
         System.out.println("ASTAR:  "+solutionAStar.toString());
         System.out.println("DIJKSTRA:  "+solutionDijkstra.toString());
-        AbstractInputData.Mode m=data.getMode();
-        if (solutionDijkstra.isFeasible()){
-            if (m==AbstractInputData.Mode.LENGTH){
-                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionAStar.getPath().getLength()/1000);
-            }
-            else if (m==AbstractInputData.Mode.TIME){
-                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionAStar.getPath().getMinimumTravelTime()/60);
-            }
-        }
+        //AbstractInputData.Mode m=data.getMode();
+        // if (solutionDijkstra.isFeasible()){
+        //     if (m==AbstractInputData.Mode.LENGTH){
+        //         System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionAStar.getPath().getLength()/1000);
+        //     }
+        //     else if (m==AbstractInputData.Mode.TIME){
+        //         System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionAStar.getPath().getMinimumTravelTime()/60);
+        //     }
+        // }
     }
 
 
@@ -141,6 +142,19 @@ public class Launch3 {
         return data;
     }
 
+    public static void verifierDijkstraAvecPath(ShortestPathSolution solutionDijkstra){
+        AbstractInputData.Mode m=solutionDijkstra.getInputData().getMode();
+        if (solutionDijkstra.isFeasible()){
+            if (m==AbstractInputData.Mode.LENGTH){
+                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getLength()/1000);
+            }
+            else if (m==AbstractInputData.Mode.TIME){
+                System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getMinimumTravelTime()/60);
+            }
+        }
+
+    }
+
 
     
 
@@ -148,35 +162,53 @@ public class Launch3 {
 
     public static void main(String[] args) throws Exception {
         try{
+            DijkstraAlgorithm dijkstraAlgo;
+            ShortestPathSolution solutionDijkstra;
             //TEST POUR LE GRAPHE INSA
             Graph g = init_carte("/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr");
             System.out.println("-----------------------");
             System.out.println("TEST POUR LE GRAPHE INSA");
+            
             //Test chemin plus court pour tous les moyens de transport(chemin possible)
             ShortestPathData d=initialize_data(10, 30, 0, g);
             System.out.println("-----------------------");
             System.out.println(d.toString());
-            compareDijkstraEtBellman(d);
-            compareDijkstraEtAstar(d);
+            dijkstraAlgo = new DijkstraAlgorithm(d);
+            solutionDijkstra = dijkstraAlgo.run();
+            verifierDijkstraAvecPath(solutionDijkstra);
+            compareDijkstraEtBellman(solutionDijkstra);
+            compareDijkstraEtAstar(solutionDijkstra);
+
             //Test chemin plus court uniquement pour voitures (chemin non disponible)
             d=initialize_data(20, 40, 1, g);
             System.out.println("-----------------------");
             System.out.println(d.toString());
-            compareDijkstraEtBellman(d);
-            compareDijkstraEtAstar(d);
+            dijkstraAlgo = new DijkstraAlgorithm(d);
+            solutionDijkstra = dijkstraAlgo.run();
+            verifierDijkstraAvecPath(solutionDijkstra);
+            compareDijkstraEtBellman(solutionDijkstra);
+            compareDijkstraEtAstar(solutionDijkstra);
+
             //Test chemin plus rapide pour tous les moyens de transport (chemin disponible)
             d=initialize_data(5, 25, 2, g);
             System.out.println("-----------------------");
             System.out.println(d.toString());
-            compareDijkstraEtBellman(d);
-            compareDijkstraEtAstar(d);
+            dijkstraAlgo = new DijkstraAlgorithm(d);
+            solutionDijkstra = dijkstraAlgo.run();
+            verifierDijkstraAvecPath(solutionDijkstra);
+            compareDijkstraEtBellman(solutionDijkstra);
+            compareDijkstraEtAstar(solutionDijkstra);
+            
             //Test chemin plus rapide uniquement a pied (chemin non disponible)
             d=initialize_data(0, 50, 3, g);
             System.out.println("-----------------------");
             System.out.println(d.toString());
-            compareDijkstraEtBellman(d);
-            compareDijkstraEtAstar(d);
-
+            dijkstraAlgo = new DijkstraAlgorithm(d);
+            solutionDijkstra = dijkstraAlgo.run();
+            verifierDijkstraAvecPath(solutionDijkstra);
+            compareDijkstraEtBellman(solutionDijkstra);
+            compareDijkstraEtAstar(solutionDijkstra);
+            
 
             //TEST POUR LE GRAPHE CARRE_DENSE
             System.out.println("-----------------------");
@@ -186,20 +218,51 @@ public class Launch3 {
             d=initialize_data(0, 500, 0, g);
             System.out.println("-----------------------");
             System.out.println(d.toString());
-                //compareDijkstraEtBellman(d);
-            compareDijkstraEtAstar(d);
+            dijkstraAlgo = new DijkstraAlgorithm(d);
+            solutionDijkstra = dijkstraAlgo.run();
+            //compareDijkstraEtBellman(d);
+            verifierDijkstraAvecPath(solutionDijkstra);
+            compareDijkstraEtAstar(solutionDijkstra);
+                
             d=initialize_data(0, 500, 2, g);
             System.out.println("-----------------------");
             System.out.println(d.toString());
-                //compareDijkstraEtBellman(d);
-            compareDijkstraEtAstar(d);
+            dijkstraAlgo = new DijkstraAlgorithm(d);
+            solutionDijkstra = dijkstraAlgo.run();
+            //compareDijkstraEtBellman(d);
+            verifierDijkstraAvecPath(solutionDijkstra);
+            compareDijkstraEtAstar(solutionDijkstra);
+
+            System.out.println("-----------------------");
+            System.out.println("-----------------------");
+            System.out.println("TEST POUR AUTRES GRAPHES DE 0 A 200");
+            for(String map : autres_maps){
+                //TEST POUR LE GRAPHE BELGIUM
+                System.out.println("-----------------------");
+                g = init_carte(map);
+                d=initialize_data(0, 200, 0, g);
+                System.out.println("-----------------------");
+                System.out.println(d.toString());
+                dijkstraAlgo = new DijkstraAlgorithm(d);
+                solutionDijkstra = dijkstraAlgo.run();
+                verifierDijkstraAvecPath(solutionDijkstra);
+                compareDijkstraEtAstar(solutionDijkstra);
+                
+                d=initialize_data(0, 200, 2, g);
+                System.out.println("-----------------------");
+                System.out.println(d.toString());
+                dijkstraAlgo = new DijkstraAlgorithm(d);
+                solutionDijkstra = dijkstraAlgo.run();
+                verifierDijkstraAvecPath(solutionDijkstra);
+                compareDijkstraEtAstar(solutionDijkstra);
+            }
 
         }
         catch(FileNotFoundException e){
             System.out.println("Fichier pas trouve");
         }
         catch(IOException e){
-            System.out.println("Pb init_carte");
+            System.out.println("Probleme init_carte");
         }
     }
 }
