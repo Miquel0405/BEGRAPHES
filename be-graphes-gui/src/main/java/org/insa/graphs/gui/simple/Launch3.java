@@ -37,13 +37,11 @@ public class Launch3 {
 
     static String[] autres_maps= {
         "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/belgium.mapgr",
-        "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/washington.mapgr"
+        "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/washington.mapgr",
+        //"/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/fractal.mapgr",
+        "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/france.mapgr",
+        "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/chile.mapgr"
     };
-    
-    // static String mapINSA = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/insa.mapgr";
-    // static String mapBelgium = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/belgium.mapgr";
-    // static String mapWashington = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/washington.mapgr";
-    // static String mapCarreDense = "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/carre-dense.mapgr";
     
     
     
@@ -87,49 +85,23 @@ public class Launch3 {
 
 
     public static void compareDijkstraEtBellman(ShortestPathSolution solutionDijkstra){
-        //DijkstraAlgorithm dijkstraAlgo;
         BellmanFordAlgorithm bellmanAlgo;
-        //ShortestPathSolution solutionDijkstra;
         ShortestPathSolution solutionBellman;
-        //dijkstraAlgo = new DijkstraAlgorithm(data);
         bellmanAlgo= new BellmanFordAlgorithm(solutionDijkstra.getInputData());
-        //solutionDijkstra = dijkstraAlgo.run();
         solutionBellman = bellmanAlgo.run();
         System.out.println("BELLMAN:  "+solutionBellman.toString());
         System.out.println("DIJKSTRA:  "+solutionDijkstra.toString());
-        //AbstractInputData.Mode m=data.getMode();
-        // if (solutionDijkstra.isFeasible()){
-        //     if (m==AbstractInputData.Mode.LENGTH){
-        //         System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getLength()/1000);
-        //     }
-        //     else if (m==AbstractInputData.Mode.TIME){
-        //         System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionDijkstra.getPath().getMinimumTravelTime()/60);
-        //     }
-        // }
     }
 
 
 
     public static void compareDijkstraEtAstar(ShortestPathSolution solutionDijkstra){
-        //DijkstraAlgorithm dijkstraAlgo;
         AStarAlgorithm aStarAlgo;
-        //ShortestPathSolution solutionDijkstra;
         ShortestPathSolution solutionAStar;
-        //dijkstraAlgo = new DijkstraAlgorithm(data);
         aStarAlgo= new AStarAlgorithm(solutionDijkstra.getInputData());
-        //solutionDijkstra = dijkstraAlgo.run();
         solutionAStar = aStarAlgo.run();
         System.out.println("ASTAR:  "+solutionAStar.toString());
         System.out.println("DIJKSTRA:  "+solutionDijkstra.toString());
-        //AbstractInputData.Mode m=data.getMode();
-        // if (solutionDijkstra.isFeasible()){
-        //     if (m==AbstractInputData.Mode.LENGTH){
-        //         System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionAStar.getPath().getLength()/1000);
-        //     }
-        //     else if (m==AbstractInputData.Mode.TIME){
-        //         System.out.println("Resultat du Dijkstra trouvé par la classe Path: "+ solutionAStar.getPath().getMinimumTravelTime()/60);
-        //     }
-        // }
     }
 
 
