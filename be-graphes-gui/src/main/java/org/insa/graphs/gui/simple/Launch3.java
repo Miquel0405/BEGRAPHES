@@ -34,14 +34,6 @@ public class Launch3 {
     private static List <ArcInspector> listInspector;
     private static ArcInspector arcInspector;
 
-
-    static String[] autres_maps= {
-        "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/belgium.mapgr",
-        "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/washington.mapgr",
-        //"/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/fractal.mapgr",
-        "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/france.mapgr",
-        "/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/chile.mapgr"
-    };
     
     
     
@@ -195,7 +187,8 @@ public class Launch3 {
             //compareDijkstraEtBellman(d);
             verifierDijkstraAvecPath(solutionDijkstra);
             compareDijkstraEtAstar(solutionDijkstra);
-                
+            
+
             d=initialize_data(0, 500, 2, g);
             System.out.println("-----------------------");
             System.out.println(d.toString());
@@ -206,28 +199,50 @@ public class Launch3 {
             compareDijkstraEtAstar(solutionDijkstra);
 
             System.out.println("-----------------------");
+
+            //TEST POUR HAUTE-GARONNE EN TEMPS ET DISTANCE
             System.out.println("-----------------------");
-            System.out.println("TEST POUR AUTRES GRAPHES DE 0 A 200");
-            for(String map : autres_maps){
-                //TEST POUR LE GRAPHE BELGIUM
-                System.out.println("-----------------------");
-                g = init_carte(map);
-                d=initialize_data(0, 200, 0, g);
-                System.out.println("-----------------------");
-                System.out.println(d.toString());
-                dijkstraAlgo = new DijkstraAlgorithm(d);
-                solutionDijkstra = dijkstraAlgo.run();
-                verifierDijkstraAvecPath(solutionDijkstra);
-                compareDijkstraEtAstar(solutionDijkstra);
-                
-                d=initialize_data(0, 200, 2, g);
-                System.out.println("-----------------------");
-                System.out.println(d.toString());
-                dijkstraAlgo = new DijkstraAlgorithm(d);
-                solutionDijkstra = dijkstraAlgo.run();
-                verifierDijkstraAvecPath(solutionDijkstra);
-                compareDijkstraEtAstar(solutionDijkstra);
-            }
+            System.out.println("TEST POUR HAUTE-GARONNE EN TEMPS ET DISTANCE");
+            g = init_carte("/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/haute-garonne.mapgr");
+            d=initialize_data(12669, 35646, 2, g);
+            System.out.println("-----------------------");
+            System.out.println(d.toString());
+            dijkstraAlgo = new DijkstraAlgorithm(d);
+            solutionDijkstra = dijkstraAlgo.run();
+            verifierDijkstraAvecPath(solutionDijkstra);
+            compareDijkstraEtAstar(solutionDijkstra);
+            d=initialize_data(12669, 35646, 0, g);
+            System.out.println("-----------------------");
+            System.out.println(d.toString());
+            dijkstraAlgo = new DijkstraAlgorithm(d);
+            solutionDijkstra = dijkstraAlgo.run();
+            verifierDijkstraAvecPath(solutionDijkstra);
+            compareDijkstraEtAstar(solutionDijkstra);
+
+            
+            //TEST POUR CHILE QUI NE DOIT TROUVER AUCUN CHEMIN
+            System.out.println("-----------------------");
+            System.out.println("TEST POUR CHILE QUI NE DOIT TROUVER AUCUN CHEMIN");
+            g = init_carte("/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/chile.mapgr");
+            d=initialize_data(122669, 356046, 0, g);
+            System.out.println("-----------------------");
+            System.out.println(d.toString());
+            dijkstraAlgo = new DijkstraAlgorithm(d);
+            solutionDijkstra = dijkstraAlgo.run();
+            verifierDijkstraAvecPath(solutionDijkstra);
+            compareDijkstraEtAstar(solutionDijkstra);
+            
+            //TEST POUR FRACTAL POUR MONTRER LES DIFFERENCES DE TEMPS ENTRE A-STAR ET DIJKSTRA
+            g = init_carte("/mnt/commetud/3eme Annee MIC/Graphes-et-Algorithmes/Maps/fractal.mapgr");
+            d=initialize_data(0, 200, 2, g);
+            System.out.println("-----------------------");
+            System.out.println("TEST POUR FRACTAL POUR MONTRER LES DIFFERENCES DE TEMPS ENTRE A-STAR ET DIJKSTRA");
+            System.out.println(d.toString());
+            dijkstraAlgo = new DijkstraAlgorithm(d);
+            solutionDijkstra = dijkstraAlgo.run();
+            verifierDijkstraAvecPath(solutionDijkstra);
+            compareDijkstraEtAstar(solutionDijkstra);
+            
 
         }
         catch(FileNotFoundException e){
